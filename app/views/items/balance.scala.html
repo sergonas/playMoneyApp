@@ -1,0 +1,22 @@
+@(obj: Balance)
+@main(obj.name){
+    @navbar()
+    <div class="container main-block">
+        <form role="form">
+            <div class="form-group">
+                <label for="nameField">Название</label>
+                <input type="text" class="form-control" id="nameField" value="@obj.name">
+            </div>
+            <div class="form-group">
+                <label for="amountField">Баланс</label>
+                <input type="text" class="form-control" id="amountField" value="@obj.balance">
+            </div>
+            <div class="form-group">
+                <label for="descField">Описание</label>
+                <input type="text" class="form-control" id="descField" value="@obj.description">
+            </div>
+            <button type="submit" class="btn btn-success">Сохранить</button>
+            <button class="btn btn-danger">Удалить</button>
+        </form>
+    </div>
+}

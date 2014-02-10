@@ -1,0 +1,17 @@
+@(balances: List[Balance])
+<span><a href="@routes.Money.balances">Баланс</a></span>
+<table class="table table-bordered">
+    <tr>
+        <th style="width: 40px">#</th>
+        <th>Название счета</th>
+        <th>Баланс</th>
+    </tr>
+    @for(b <- balances) {
+        <tr>
+            <td>@b.id.get</td>
+            <td><a href="@routes.Money.balance(b.id.get)">@b.name</a></td>
+            <td>@b.balance р.</td>
+        </tr>
+    }
+</table>
+<button type="button" class="btn btn-default btn-xs">Создать</button>

@@ -3,10 +3,16 @@
 # ~~~~
 
 # Home page
-GET         /                    controllers.Application.index
-GET         /overview            controllers.Money.overview
-GET         /:message            controllers.Application.showMessage(message: String)
-POST        /                    controllers.Application.takeMessage
+GET        /                    controllers.Money.index
+
+# Routes for readin data
+GET        /overview            controllers.Money.overview
+GET        /income              controllers.Money.incomes
+GET        /outcome             controllers.Money.outcomes
+GET        /balance             controllers.Money.balances
+GET        /outcome/:id         controllers.Money.outcome(id: Long)
+GET        /income/:id          controllers.Money.income(id: Long)
+GET        /balance/:id         controllers.Money.balance(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.at(path="/public", file)
+GET        /assets/*file        controllers.Assets.at(path="/public", file)

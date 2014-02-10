@@ -1,0 +1,19 @@
+@(incomes: List[Income])
+<span><a href="@routes.Money.incomes">Доходы</a></span>
+<table class="table table-bordered">
+    <tr>
+        <th style="width: 40px">#</th>
+        <th>Наименование</th>
+        <th>Сумма</th>
+        <th>Дата</th>
+    </tr>
+    @for(inc <- incomes) {
+        <tr>
+            <td>@inc.id</td>
+            <td><a href="@routes.Money.income(inc.id.get)">@inc.name</a></td>
+            <td>@inc.amount р.</td>
+            <td>@inc.date.format("dd-MM-yyyy")</td>
+        </tr>
+    }
+</table>
+<button type="button" class="btn btn-default btn-xs">Создать</button>

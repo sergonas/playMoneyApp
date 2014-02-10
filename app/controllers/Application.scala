@@ -9,12 +9,14 @@ object Application extends Controller {
   }
   
   def showMessage(msg: String) = Action {
-    Ok(views.html.message(msg))
+//    Ok(views.html.message(msg))
+    NotFound("This page no more available")
   }
 
   def takeMessage = Action { implicit request =>
-    val postParams = request.body.asFormUrlEncoded.get
-    val msg = postParams("message")
-    Ok(views.html.message(msg(0)))
+//    val postParams = request.body.asFormUrlEncoded.get
+//    val msg = postParams("message")
+//    Ok(views.html.message(msg(0)))
+    NotFound("This page no more available")
   }
 }
