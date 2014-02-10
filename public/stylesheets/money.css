@@ -2,3 +2,12 @@ div.table-block {
     width: 50%;
     margin: auto;
 }
+
+div.table-block tr th, div.table-block tr td {
+    text-align: center;
+}
+
+.main-block {
+    margin-top: 50px;
+    padding-top: 10px;
+}
