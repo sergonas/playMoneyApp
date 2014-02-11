@@ -8,10 +8,15 @@ GET        /                    controllers.Money.index
 # Routes for readin data
 GET        /overview            controllers.Money.overview
 GET        /income              controllers.Money.incomes
-GET        /outcome             controllers.Money.outcomes
-GET        /balance             controllers.Money.balances
-GET        /outcome/:id         controllers.Money.outcome(id: Long)
+GET        /income/new          controllers.Money.createIncome
 GET        /income/:id          controllers.Money.income(id: Long)
+
+GET        /outcome             controllers.Money.outcomes
+GET        /outcome/new         controllers.Money.createOutcome
+GET        /outcome/:id         controllers.Money.outcome(id: Long)
+
+GET        /balance             controllers.Money.balances
+GET        /balance/new         controllers.Money.createBalance
 GET        /balance/:id         controllers.Money.balance(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path

@@ -16,6 +16,10 @@
                 <input type="date" class="form-control" id="dateField" value="@obj.date.format("dd-MM-yyyy")">
             </div>
             <div class="form-group">
+                <label for="accountField">Дата</label>
+                <input type="text" class="form-control" id="accountField" value="@{Balance.findByID(obj.balanceId).name}">
+            </div>
+            <div class="form-group">
                 <label for="descField">Описание</label>
                 <input type="text" class="form-control" id="descField" value="@obj.description">
             </div>
