@@ -1,27 +1,22 @@
 @(obj: Income)
-@main(obj.name){
-    @navbar()
-    <div class="container main-block">
-        <form role="form">
-            <div class="form-group">
-                <label for="nameField">Название</label>
-                <input type="text" class="form-control" id="nameField" value="@obj.name">
-            </div>
-            <div class="form-group">
-                <label for="amountField">Сумма</label>
-                <input type="text" class="form-control" id="amountField" value="@obj.amount">
-            </div>
-            <div class="form-group">
-                <label for="dateField">Дата</label>
-                <input type="date" class="form-control" id="dateField" value="@obj.date.format("dd-MM-yyyy")">
-            </div>
-            <div class="form-group">
-                <label for="descField">Описание</label>
-                <input type="text" class="form-control" id="descField" value="@obj.description">
-            </div>
-            <button type="submit" class="btn btn-success">Сохранить</button>
-            <button class="btn btn-default">Отменить</button>
-            <button class="btn btn-danger">Удалить</button>
-        </form>
-    </div>
-}
+
+<div class="form-group">
+    <label for="name">Название</label>
+    <input name="name" type="text" class="form-control" id="name" value="@obj.name">
+</div>
+<div class="form-group">
+    <label for="amount">Сумма</label>
+    <input name="amount" type="text" class="form-control" id="amount" value="@obj.amount">
+</div>
+<div class="form-group">
+    <label for="date">Дата</label>
+    <input name="date" type="date" class="form-control" id="date" value="@obj.date.format("yyyy-MM-dd")">
+</div>
+<div class="form-group">
+    <label for="accountField">Счет</label>
+    <input name="account" type="text" class="form-control" id="account" value="@{Balance.findByID(obj.balanceId).name}">
+</div>
+<div class="form-group">
+    <label for="desc">Описание</label>
+    <input name="desc" type="text" class="form-control" id="desc" value="@obj.description">
+</div>

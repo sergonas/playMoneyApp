@@ -12,7 +12,7 @@ case class Outcome(id: Pk[Long] = NotAssigned, balanceId: Long, name: String, am
 case class Balance(id: Pk[Long] = NotAssigned, name: String, balance: Double, description: Option[String])
 
 object Income {
-  val dbPlaceholder = List(Income(Id(1), 1, "Зарплата", 30000.0, new Date(), Option("фыловл")),
+  var dbPlaceholder = List(Income(Id(1), 1, "Зарплата", 30000.0, new Date(), Option("фыловл")),
       Income(Id(2), 1, "Взятка", 300.0, new Date(), Option("ФВФЫВ")))
   def findByID(id: Long) = {
     dbPlaceholder.filter(_.id.get == id).head
@@ -20,6 +20,11 @@ object Income {
 
   def getFirstTen = {
     dbPlaceholder
+  }
+
+  def insert(obj: Income) {
+    val maxId = dbPlaceholder.foldLeft(0L)(_ max _.id.get) + 1
+    dbPlaceholder = (obj.copy(id = Id(maxId)) :: dbPlaceholder).sortBy(_.id.get).reverse
   }
 }
 
@@ -39,7 +44,7 @@ object Outcome {
 }
 
 object Balance {
-  val dbPlaceholder = List(Balance(Id(1), "Наличные", 30000.0, Option("фыловл")),
+  var dbPlaceholder = List(Balance(Id(1), "Наличные", 30000.0, Option("фыловл")),
     Balance(Id(2), "Карта", 300.0, Option("ФВФЫВ")))
 
   def findByID(id: Long) = {
@@ -48,6 +53,10 @@ object Balance {
 
   def getFirstTen = {
     dbPlaceholder
+  }
+
+  def insert(obj: Balance) {
+    dbPlaceholder = obj :: dbPlaceholder
   }
 }
 

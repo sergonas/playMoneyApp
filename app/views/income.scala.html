@@ -1,5 +1,5 @@
 @(incomes: List[Income])
-<span><a href="@routes.Money.incomes">Доходы</a></span>
+<span><a href="@routes.Money.incomes()">Доходы</a></span>
 <table class="table table-bordered">
     <tr>
         <th style="width: 40px">#</th>
@@ -10,10 +10,10 @@
     @for(inc <- incomes) {
         <tr>
             <td>@inc.id</td>
-            <td><a href="@routes.Money.income(inc.id.get)">@inc.name</a></td>
+            <td><a href="@routes.Money.income(inc.id.getOrElse(1))">@inc.name</a></td>
             <td>@inc.amount р.</td>
-            <td>@inc.date.format("dd-MM-yyyy")</td>
+            <td>@inc.date.format("yyyy-MM-dd")</td>
         </tr>
     }
 </table>
-<a href="@routes.Money.createIncome()"><button type="button" class="btn btn-default btn-xs">Создать</button></a>
+<a href="@routes.Money.newIncome()"><button type="button" class="btn btn-default btn-xs">Создать</button></a>

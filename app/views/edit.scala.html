@@ -1,0 +1,17 @@
+@(obj: {def name: String})
+@import models._
+@main(obj.name){
+    @navbar()
+    <div class="container main-block">
+        <form role="form">
+            @obj match {
+                case a: Income => { @items.income(a) }
+                case a: Outcome => { @items.outcome(a) }
+                case a: Balance => { @items.balance(a) }
+            }
+            <button type="submit" class="btn btn-success">Сохранить</button>
+            <a class="btn btn-default" href="@routes.Money.overview()">Отменить</a>
+            <button class="btn btn-danger">Удалить</button>
+        </form>
+    </div>
+}
