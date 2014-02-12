@@ -1,5 +1,5 @@
 @(balances: List[Balance])
-<span><a href="@routes.Money.balances">Баланс</a></span>
+<span><a href="@routes.BalanceControls.balances">Баланс</a></span>
 <table class="table table-bordered">
     <tr>
         <th style="width: 40px">#</th>
@@ -9,9 +9,9 @@
     @for(b <- balances) {
         <tr>
             <td>@b.id.get</td>
-            <td><a href="@routes.Money.balance(b.id.get)">@b.name</a></td>
+            <td><a href="@routes.BalanceControls.readBalance(b.id.get)">@b.name</a></td>
             <td>@b.balance р.</td>
         </tr>
     }
 </table>
-<a href="@routes.Money.newBalance()"><button type="button" class="btn btn-default btn-xs">Создать</button></a>
+<a href="@routes.BalanceControls.newBalance()"><button type="button" class="btn btn-default btn-xs">Создать</button></a>

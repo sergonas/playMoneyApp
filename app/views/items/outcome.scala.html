@@ -1,23 +1,26 @@
 @(obj: Outcome)
 
-<div class="form-group">
-    <label for="nameField">Название</label>
-    <input type="text" class="form-control" id="nameField" value="@obj.name">
+<div style="display: none;" class="form-group">
+    <label for="id">Название</label>
+    <input name="id" type="text" class="form-control" id="id" value="@obj.id.getOrElse("-1")">
 </div>
 <div class="form-group">
-    <label for="amountField">Сумма</label>
-    <input type="text" class="form-control" id="amountField" value="@obj.amount">
+    <label for="name">Название</label>
+    <input name="name" type="text" class="form-control" id="name" value="@obj.name">
 </div>
 <div class="form-group">
-    <label for="dateField">Дата</label>
-    <input type="date" class="form-control" id="dateField" value="@obj.date.format("dd-MM-yyyy")">
+    <label for="amount">Сумма</label>
+    <input name="amount" type="text" class="form-control" id="amount" value="@obj.amount">
+</div>
+<div class="form-group">
+    <label for="date">Дата</label>
+    <input name="date" type="date" class="form-control" id="date" value="@obj.date.format("yyyy-MM-dd")">
 </div>
 <div class="form-group">
     <label for="accountField">Счет</label>
-    <input type="text" class="form-control" id="accountField" value="@{Balance.findByID(obj.balanceId).name}">
-    <a href="@routes.Money.balance(obj.balanceId)"><span class="glyphicon glyphicon-link"></span></a>
+    <input name="account" type="text" class="form-control" id="account" value="@{Balance.findByID(obj.balanceId).name}">
 </div>
 <div class="form-group">
-    <label for="descField">Описание</label>
-    <input type="text" class="form-control" id="descField" value="@obj.description">
+    <label for="desc">Описание</label>
+    <input name="desc" type="text" class="form-control" id="desc" value="@obj.description">
 </div>

@@ -1,5 +1,5 @@
 @(outcomes: List[Outcome])
-<span><a href="@routes.Money.outcomes">Расходы</a></span>
+<span><a href="@routes.OutcomeControls.outcomes">Расходы</a></span>
 <table class="table table-bordered">
     <tr>
         <th style="width: 40px">#</th>
@@ -10,10 +10,10 @@
     @for(oc <- outcomes) {
         <tr>
             <td>@oc.id</td>
-            <td><a href="@routes.Money.outcome(oc.id.get)">@oc.name</a></td>
+            <td><a href="@routes.OutcomeControls.readOutcome(oc.id.get)">@oc.name</a></td>
             <td>@oc.amount р.</td>
             <td>@oc.date.format("dd-MM-yyyy")</td>
         </tr>
     }
 </table>
-<a href="@routes.Money.newOutcome()"><button type="button" class="btn btn-default btn-xs">Создать</button></a>
+<a href="@routes.OutcomeControls.newOutcome()"><button type="button" class="btn btn-default btn-xs">Создать</button></a>

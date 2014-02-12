@@ -8,18 +8,26 @@ GET         /                    controllers.Money.index
 # Routes for readin data
 GET         /overview            controllers.Money.overview
 
-GET         /income              controllers.Money.incomes
-GET         /income/new          controllers.Money.newIncome
-POST        /income/new          controllers.Money.insertIncome
-GET         /income/:id          controllers.Money.income(id: Long)
+GET         /income              controllers.IncomeControls.incomes
+GET         /income/new          controllers.IncomeControls.newIncome
+POST        /income/new          controllers.IncomeControls.createIncome
+GET         /income/:id          controllers.IncomeControls.readIncome(id: Long)
+PUT         /income/:id          controllers.IncomeControls.updateIncome(id: Long)
+DELETE      /income/:id          controllers.IncomeControls.deleteIncome(id: Long)
 
-GET         /outcome             controllers.Money.outcomes
-GET         /outcome/new         controllers.Money.newOutcome
-GET         /outcome/:id         controllers.Money.outcome(id: Long)
+GET         /outcome             controllers.OutcomeControls.outcomes
+GET         /outcome/new         controllers.OutcomeControls.newOutcome
+POST        /outcome/new         controllers.OutcomeControls.createOutcome
+GET         /outcome/:id         controllers.OutcomeControls.readOutcome(id: Long)
+PUT         /outcome/:id         controllers.OutcomeControls.updateOutcome(id: Long)
+DELETE      /outcome/:id         controllers.OutcomeControls.deleteOutcome(id: Long)
 
-GET         /balance             controllers.Money.balances
-GET         /balance/new         controllers.Money.newBalance
-GET         /balance/:id         controllers.Money.balance(id: Long)
+GET         /balance             controllers.BalanceControls.balances
+GET         /balance/new         controllers.BalanceControls.newBalance
+POST        /balance/new         controllers.BalanceControls.createBalance
+GET         /balance/:id         controllers.BalanceControls.readBalance(id: Long)
+PUT         /balance/:id         controllers.BalanceControls.updateBalance(id: Long)
+DELETE      /balance/:id         controllers.BalanceControls.deleteBalance(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file        controllers.Assets.at(path="/public", file)

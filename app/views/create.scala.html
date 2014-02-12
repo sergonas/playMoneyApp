@@ -4,9 +4,9 @@
     @navbar()
     <div class="container main-block">
         @obj match {
-                case a: Income => { <form role="form" action="@routes.Money.insertIncome()" method="post"> @items.income(a) }
-                case a: Outcome => { @items.outcome(a) }
-                case a: Balance => { @items.balance(a) }
+                case a: Income => { <form role="form" action="@routes.IncomeControls.createIncome()" method="post"> @items.income(a) }
+                case a: Outcome => { <form role="form" action="@routes.OutcomeControls.createOutcome()" method="post"> @items.outcome(a) }
+                case a: Balance => { <form role="form" action="@routes.BalanceControls.createBalance()" method="post"> @items.balance(a) }
             }
             <button type="submit" class="btn btn-success">Создать</button>
             <a class="btn btn-default" href="@routes.Money.overview()">Отменить</a>

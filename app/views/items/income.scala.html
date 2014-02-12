@@ -1,5 +1,9 @@
 @(obj: Income)
 
+<div style="display: none;" class="form-group">
+    <label for="id">Название</label>
+    <input name="id" type="text" class="form-control" id="id" value="@obj.id.getOrElse("-1")">
+</div>
 <div class="form-group">
     <label for="name">Название</label>
     <input name="name" type="text" class="form-control" id="name" value="@obj.name">

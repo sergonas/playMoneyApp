@@ -1,14 +1,18 @@
 @(obj: Balance)
 
-<div class="form-group">
-    <label for="nameField">Название</label>
-    <input type="text" class="form-control" id="nameField" value="@obj.name">
+<div style="display: none;" class="form-group">
+    <label for="id">Название</label>
+    <input name="id" type="text" class="form-control" id="id" value="@obj.id.getOrElse("-1")">
 </div>
 <div class="form-group">
-    <label for="balanceField">Баланс</label>
-    <input type="text" class="form-control" id="balanceField" value="@obj.balance">
+    <label for="name">Название</label>
+    <input name="name" type="text" class="form-control" id="name" value="@obj.name">
 </div>
 <div class="form-group">
-    <label for="descField">Описание</label>
-    <input type="text" class="form-control" id="descField" value="@obj.description">
+    <label for="balance">Баланс</label>
+    <input name="balance" type="text" class="form-control" id="balance" value="@obj.balance">
+</div>
+<div class="form-group">
+    <label for="desc">Описание</label>
+    <input name="desc" type="text" class="form-control" id="desc" value="@obj.description">
 </div>
