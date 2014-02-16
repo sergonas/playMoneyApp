@@ -12,84 +12,183 @@ case class Outcome(id: Pk[Long] = NotAssigned, balanceId: Long, name: String, am
 case class Balance(id: Pk[Long] = NotAssigned, name: String, balance: Double, description: Option[String])
 
 object Income {
-  var dbPlaceholder = List(Income(Id(1), 1, "Зарплата", 30000.0, new Date(), Option("фыловл")),
-      Income(Id(2), 1, "Взятка", 300.0, new Date(), Option("ФВФЫВ")))
+  val simple = {
+    get[Pk[Long]]("incomes.id") ~
+      get[Long]("incomes.balance_id") ~
+      get[String]("incomes.name") ~
+      get[Double]("incomes.amount") ~
+      get[Date]("incomes.date") ~
+      get[Option[String]]("incomes.description") map {
+      case id~balanceId~name~amount~date~description => Income(id, balanceId, name, amount, date, description)
+    }
+  }
 
   def findByID(id: Long) = {
-    dbPlaceholder.filter(_.id.get == id).head
+    DB.withConnection { implicit connection =>
+      SQL("select * from incomes where id = {id};").on('id -> id).as(Income.simple.single)
+    }
   }
 
   def getLastTen = {
-    dbPlaceholder.sortBy(_.id.get).reverse.slice(0, 10)
+    DB.withConnection { implicit connection =>
+      SQL("SELECT * FROM incomes ORDER BY id DESC LIMIT 10;").as(Income.simple *)
+    }
+  }
+
+  def getAll = {
+    DB.withConnection { implicit connection =>
+      SQL("SELECT * FROM incomes ORDER BY date DESC, id;").as(Income.simple *)
+    }
   }
 
   def insert(obj: Income): Long = {
-    val maxId = dbPlaceholder.foldLeft(0L)(_ max _.id.get) + 1
-    dbPlaceholder = (obj.copy(id = Id(maxId)) :: dbPlaceholder).sortBy(_.id.get).reverse
-    1L
+    println("!!! " + obj + " !!!")
+    DB.withConnection { implicit connection =>
+      SQL("insert into incomes (balance_id, name, amount, date, description) VALUES ({balance_id}, {name}, {amount}, {date}, {description});").on(
+        'balance_id -> obj.balanceId,
+        'date -> obj.date,
+        'name -> obj.name,
+        'amount -> obj.amount,
+        'description -> obj.description
+      ).executeUpdate()
+    }
   }
 
   def update(id: Long, obj: Income) {
-    dbPlaceholder = (obj :: dbPlaceholder.filter(_.id.get != id)).sortBy(_.id.get).reverse
+    DB.withConnection { implicit connection =>
+      SQL("update incomes set balance_id = {balance_id}, date = {date}, name = {name}, amount = {amount}, description = {description} where id = {id};").on(
+        'id -> id,
+        'balance_id -> obj.balanceId,
+        'date -> obj.date,
+        'name -> obj.name,
+        'amount -> obj.amount,
+        'description -> obj.description
+      ).executeUpdate()
+    }
   }
 
   def delete(id: Long) {
-    dbPlaceholder = dbPlaceholder.filter(_.id.get != id).sortBy(_.id.get).reverse
+    DB.withConnection { implicit connection =>
+      SQL("delete from incomes where id = {id};").on('id -> id).executeUpdate()
+    }
   }
 }
 
 object Outcome {
-  var dbPlaceholder = List(Outcome(Id(1), 1, "Пиво", 200.0, new Date(), Option("Лала")),
-    Outcome(Id(2), 1, "Водка", 300.0, new Date(), Option("ФВФЫВ")),
-    Outcome(Id(3), 1, "Еда", 500.0, new Date(), Option("Фыр фыр фыр")))
+  val simple = {
+      get[Pk[Long]]("outcomes.id") ~
+      get[Long]("outcomes.balance_id") ~
+      get[String]("outcomes.name") ~
+      get[Double]("outcomes.amount") ~
+      get[Date]("outcomes.date") ~
+      get[Option[String]]("outcomes.description") map {
+      case id~balanceId~name~amount~date~description => Outcome(id, balanceId, name, amount, date, description)
+    }
+  }
 
   def findByID(id: Long) = {
-    dbPlaceholder.filter(_.id.get == id).head
+    DB.withConnection { implicit connection =>
+      SQL("select * from outcomes where id = {id};").on('id -> id).as(Outcome.simple.single)
+    }
   }
 
   def getLastTen = {
-    dbPlaceholder.sortBy(_.id.get).reverse
+    DB.withConnection { implicit connection =>
+      SQL("SELECT * FROM outcomes ORDER BY id DESC LIMIT 10;").as(Outcome.simple *)
+    }
+  }
+
+  def getAll = {
+    DB.withConnection { implicit connection =>
+      SQL("SELECT * FROM outcomes ORDER BY date DESC, id;").as(Outcome.simple *)
+    }
   }
 
   def insert(obj: Outcome): Long = {
-    val maxId = dbPlaceholder.foldLeft(0L)(_ max _.id.get) + 1
-    dbPlaceholder = (obj.copy(id = Id(maxId)) :: dbPlaceholder).sortBy(_.id.get).reverse
-    1L
+    DB.withConnection { implicit connection =>
+      SQL("insert into outcomes (balance_id, name, amount, date, description) VALUES ({balance_id}, {name}, {amount}, {date}, {description});").on(
+        'balance_id -> obj.balanceId,
+        'date -> obj.date,
+        'name -> obj.name,
+        'amount -> obj.amount,
+        'description -> obj.description
+      ).executeUpdate()
+    }
   }
 
   def update(id: Long, obj: Outcome) {
-    dbPlaceholder = (obj :: dbPlaceholder.filter(_.id.get != id)).sortBy(_.id.get).reverse
+    DB.withConnection { implicit connection =>
+      SQL("update outcomes set balance_id = {balance_id}, date = {date}, name = {name}, amount = {amount}, description = {description} where id = {id};").on(
+        'id -> id,
+        'balance_id -> obj.balanceId,
+        'date -> obj.date,
+        'name -> obj.name,
+        'amount -> obj.amount,
+        'description -> obj.description
+      ).executeUpdate()
+    }
   }
 
   def delete(id: Long) {
-    dbPlaceholder = dbPlaceholder.filter(_.id.get != id).sortBy(_.id.get).reverse
+    DB.withConnection { implicit connection =>
+      SQL("delete from outcomes where id = {id};").on('id -> id).executeUpdate()
+    }
   }
 }
 
 object Balance {
-  var dbPlaceholder = List(Balance(Id(1), "Наличные", 30000.0, Option("фыловл")),
-    Balance(Id(2), "Карта", 300.0, Option("ФВФЫВ")))
+  val simple = {
+      get[Pk[Long]]("accounts.id") ~
+      get[String]("accounts.name") ~
+      get[Double]("accounts.balance") ~
+      get[Option[String]]("accounts.description") map {
+      case id~name~balance~description => Balance(id, name, balance, description)
+    }
+  }
 
   def findByID(id: Long) = {
-    dbPlaceholder.filter(_.id.get == id).head
+    DB.withConnection { implicit connection =>
+      SQL("select * from accounts where id = {id};").on('id -> id).as(Balance.simple.single)
+    }
   }
 
   def getLastTen = {
-    dbPlaceholder.sortBy(_.id.get).reverse
+    DB.withConnection { implicit connection =>
+      SQL("SELECT * FROM accounts ORDER BY id DESC LIMIT 10;").as(Balance.simple *)
+    }
+  }
+
+  def getAll = {
+    DB.withConnection { implicit connection =>
+      SQL("SELECT * FROM accounts ORDER BY id DESC;").as(Balance.simple *)
+    }
   }
 
   def insert(obj: Balance): Long = {
-    val maxId = dbPlaceholder.foldLeft(0L)(_ max _.id.get) + 1
-    dbPlaceholder = (obj.copy(id = Id(maxId)) :: dbPlaceholder).sortBy(_.id.get).reverse
-    1L
+    DB.withConnection { implicit connection =>
+      SQL("insert into accounts (name, balance, description) VALUES ({name}, {balance}, {description});").on(
+        'name -> obj.name,
+        'balance -> obj.balance,
+        'description -> obj.description
+      ).executeUpdate()
+    }
   }
 
   def update(id: Long, obj: Balance) {
-    dbPlaceholder = (obj :: dbPlaceholder.filter(_.id.get != id)).sortBy(_.id.get).reverse
+    DB.withConnection { implicit connection =>
+      SQL("update accounts set name = {name}, balance = {balance}, description = {description} where id = {id};").on(
+        'id -> id,
+        'name -> obj.name,
+        'balance -> obj.balance,
+        'description -> obj.description
+      ).executeUpdate()
+    }
   }
 
   def delete(id: Long) {
-    dbPlaceholder = dbPlaceholder.filter(_.id.get != id).sortBy(_.id.get).reverse
+    DB.withConnection { implicit connection =>
+      SQL("delete from accounts where id = {id};").on('id -> id).executeUpdate()
+    }
   }
 }
 

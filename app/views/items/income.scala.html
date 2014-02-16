@@ -1,20 +1,21 @@
 @(obj: Income)
+@import java.util.Date
 
 <div style="display: none;" class="form-group">
-    <label for="id">Название</label>
+    <label for="id">ID</label>
     <input name="id" type="text" class="form-control" id="id" value="@obj.id.getOrElse("-1")">
 </div>
 <div class="form-group">
     <label for="name">Название</label>
-    <input name="name" type="text" class="form-control" id="name" value="@obj.name">
+    <input name="name" type="text" class="form-control" id="name" placeholder="Источник дохода" value="@obj.name">
 </div>
 <div class="form-group">
     <label for="amount">Сумма</label>
-    <input name="amount" type="text" class="form-control" id="amount" value="@obj.amount">
+    <input name="amount" type="text" class="form-control" id="amount" placeholder="124.23" value="@obj.amount">
 </div>
 <div class="form-group">
     <label for="date">Дата</label>
-    <input name="date" type="date" class="form-control" id="date" value="@obj.date.format("yyyy-MM-dd")">
+    <input name="date" type="date" class="form-control" id="date" placeholder="@{new Date().format("yyyy-MM-dd")}" value="@obj.date.format("yyyy-MM-dd")">
 </div>
 <div class="form-group">
     <label for="accountField">Счет</label>

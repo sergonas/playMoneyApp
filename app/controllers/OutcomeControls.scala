@@ -22,7 +22,7 @@ object OutcomeControls extends Controller{
   )
 
   def outcomes = Action {
-    Ok(views.html.alone("Доходы")(views.html.outcome(Outcome.getLastTen)))
+    Ok(views.html.alone("Доходы")(views.html.outcome(Outcome.getAll)))
   }
 
   def readOutcome(id: Long) = Action {
@@ -30,7 +30,7 @@ object OutcomeControls extends Controller{
   }
 
   def newOutcome = Action {
-    Ok(views.html.create(Outcome(NotAssigned, 1, "Источник дохода", 0.0, new Date(), None)))
+    Ok(views.html.create(Outcome(NotAssigned, 1, "Цель расхода", 0.0, new Date(), None)))
   }
 
   def createOutcome() = Action { implicit request =>

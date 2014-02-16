@@ -20,7 +20,7 @@ object BalanceControls extends Controller {
   )
 
   def balances = Action {
-    Ok(views.html.alone("Баланс")(views.html.balance(Balance.getLastTen)))
+    Ok(views.html.alone("Баланс")(views.html.balance(Balance.getAll)))
   }
 
   def readBalance(id: Long) = Action {

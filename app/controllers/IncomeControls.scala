@@ -23,7 +23,7 @@ object IncomeControls extends Controller {
   )
 
   def incomes = Action {
-    Ok(views.html.alone("Доходы")(views.html.income(Income.getLastTen)))
+    Ok(views.html.alone("Доходы")(views.html.income(Income.getAll)))
   }
 
   def readIncome(id: Long) = Action {
@@ -38,7 +38,7 @@ object IncomeControls extends Controller {
     incomeForm.bindFromRequest.fold(
       errors => { println(errors); BadRequest },
 
-      inc => { Income.insert(inc); Redirect("/overview") }
+      inc => { println(inc); Income.insert(inc); Redirect("/overview") }
     )
   }
 

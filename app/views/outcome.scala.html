@@ -7,12 +7,12 @@
         <th>Стоимость</th>
         <th>Дата</th>
     </tr>
-    @for(oc <- outcomes) {
+    @for((oc, index) <- outcomes.zipWithIndex) {
         <tr>
-            <td>@oc.id</td>
+            <td>@{index+1}</td>
             <td><a href="@routes.OutcomeControls.readOutcome(oc.id.get)">@oc.name</a></td>
             <td>@oc.amount р.</td>
-            <td>@oc.date.format("dd-MM-yyyy")</td>
+            <td>@oc.date.format("yyyy-MM-dd")</td>
         </tr>
     }
 </table>

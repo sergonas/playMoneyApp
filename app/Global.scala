@@ -5,7 +5,7 @@ import scala.concurrent.Future
 
 
 object Global extends GlobalSettings {
-  // called when a route is found, but it was not possible to bind the request parameters
+/*  // called when a route is found, but it was not possible to bind the request parameters
   override def onBadRequest(request: RequestHeader, error: String) = {
     Future.successful(BadRequest("Bad Request: " + error))
   }
@@ -18,6 +18,5 @@ object Global extends GlobalSettings {
   // 404 - page not found error
   override def onHandlerNotFound(request: RequestHeader) = {
     Future.successful(NotFound(views.html.errors.onHandlerNotFound(request)))
-  }
-
+  }*/
 }

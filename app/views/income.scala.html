@@ -7,9 +7,9 @@
         <th>Сумма</th>
         <th>Дата</th>
     </tr>
-    @for(inc <- incomes) {
+    @for((inc, index) <- incomes.zipWithIndex) {
         <tr>
-            <td>@inc.id</td>
+            <td>@{index + 1}</td>
             <td><a href="@routes.IncomeControls.readIncome(inc.id.getOrElse(1))">@inc.name</a></td>
             <td>@inc.amount р.</td>
             <td>@inc.date.format("yyyy-MM-dd")</td>

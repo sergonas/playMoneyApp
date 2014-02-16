@@ -5,21 +5,21 @@
     <div class="container main-block">
             @obj match {
                 case a: Income => {
-                    <form role="form">
+                    <form role="form" autocomplete="off">
                     @items.income(a)
                     <a class="btn btn-success" href="@routes.Money.overview()" onclick="putSome('@routes.IncomeControls.updateIncome(a.id.get)')">Сохранить</a>
                     <a class="btn btn-default" href="@routes.Money.overview()">Отменить</a>
                     <a class="btn btn-danger" href="@routes.Money.overview()" onclick="deleteSome('@routes.IncomeControls.deleteIncome(a.id.get)')">Удалить</a>
                 }
                 case a: Outcome => {
-                    <form role="form">
+                    <form role="form" autocomplete="off">
                     @items.outcome(a)
                     <a class="btn btn-success" href="@routes.Money.overview()" onclick="putSome('@routes.OutcomeControls.updateOutcome(a.id.get)')">Сохранить</a>
                     <a class="btn btn-default" href="@routes.Money.overview()">Отменить</a>
                     <a class="btn btn-danger" href="@routes.Money.overview()" onclick="deleteSome('@routes.OutcomeControls.deleteOutcome(a.id.get)')">Удалить</a>
                 }
                 case a: Balance => {
-                    <form role="form">
+                    <form role="form" autocomplete="off">
                     @items.balance(a)
                     <a class="btn btn-success" href="@routes.Money.overview()" onclick="putSome('@routes.BalanceControls.updateBalance(a.id.get)')">Сохранить</a>
                     <a class="btn btn-default" href="@routes.Money.overview()">Отменить</a>
